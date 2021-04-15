@@ -18,10 +18,36 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
+      - name: Use node 12.x
         uses: actions/setup-node@v2
         with:
           node-version: 12.x
-      - run: |
+
+      - name: Package for this platform
+        run: |
           npm install
           npm run package
+
+      - name: Make directory for artifact
+        run: |
+          mkdir artifacts
+
+      - name: Gather artifacts on ubuntu
+        if: (matrix.platform == 'ubuntu-latest')
+        run: |
+          cp -R hello-electron-linux-x64 artifacts/
+
+      - name: Gather artifacts on macos
+        if: (matrix.platform == 'macos-latest')
+        run: |
+          cp -R hello-electron-darwin-x64 artifacts/
+
+      - name: Gather artifacts on windows
+        if: (matrix.platform == 'windows-latest')
+        run: |
+          cp -R hello-electron-win32-x64 artifacts/
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: hello-electron-${{ github.workflow }}-${{ matrix.platform }}
+          path: artifacts
