@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Continuous Delivery
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
       - name: Gather artifacts on macos
         if: (matrix.platform == 'macos-latest')
         run: |
-          cp -R hello-electron-darwin-x64 artifacts/
+          echo "skip cp -R hello-electron-darwin-x64 artifacts/ since it needs to be signed, anyway"
 
       - name: Gather artifacts on windows
         if: (matrix.platform == 'windows-latest')
