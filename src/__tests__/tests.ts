@@ -1,5 +1,6 @@
 import { deepEqual } from '../utils';
 
+// Every module must export something (typescript)
 export const dummyface = 88;
 
 function LOG(message?: any, ...optionalParams: any[]) {
