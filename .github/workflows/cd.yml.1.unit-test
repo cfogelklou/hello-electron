@@ -1,0 +1,25 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  unit-tests:
+    name: Runs unit tests on Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+
+      - name: Run unit tests (quits because CI=true in env)
+        run: |
+          npm install
+          npm run test
+
