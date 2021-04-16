@@ -22,3 +22,5 @@
         with:
           name: hello-electron-${{ github.workflow }}-${{ matrix.platform }}
           path: artifacts
+
+      # End of this workflow
