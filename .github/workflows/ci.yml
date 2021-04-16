@@ -50,3 +50,27 @@ jobs:
           npm install
           npm run package
 
+      - name: Make directory for artifact
+        run: |
+          mkdir artifacts
+
+      - name: Gather artifacts on ubuntu
+        if: (matrix.platform == 'ubuntu-latest')
+        run: |
+          cp -R hello-electron-linux-x64 artifacts/
+
+      - name: Gather artifacts on macos
+        if: (matrix.platform == 'macos-latest')
+        run: |
+          echo "skip cp -R hello-electron-darwin-x64 artifacts/ since it needs to be signed, anyway"
+
+      - name: Gather artifacts on windows
+        if: (matrix.platform == 'windows-latest')
+        run: |
+          cp -R hello-electron-win32-x64 artifacts/
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: hello-electron-${{ github.workflow }}-${{ matrix.platform }}
+          path: artifacts
+          
