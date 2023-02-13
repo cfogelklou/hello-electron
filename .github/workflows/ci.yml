@@ -13,13 +13,13 @@ jobs:
 
     steps:
       # Do git checkout
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      # Build using node 12.x
-      - name: Use node 12.x
-        uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16
 
       # Run unit tests 
       - name: Run unit tests
@@ -39,11 +39,13 @@ jobs:
     runs-on: ${{ matrix.platform}}
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use node 12.x
-        uses: actions/setup-node@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16
 
       - name: Package for this platform
         run: |
