@@ -3,6 +3,10 @@
         run: |
           mkdir artifacts
 
+      - name: Make directory for artifact
+        run: |
+          mkdir artifacts
+
       - name: Gather artifacts on ubuntu
         if: (matrix.platform == 'ubuntu-latest')
         run: |
@@ -22,5 +26,4 @@
         with:
           name: hello-electron-${{ github.workflow }}-${{ matrix.platform }}
           path: artifacts
-
-      # End of this workflow
+          

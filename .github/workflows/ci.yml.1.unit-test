@@ -2,10 +2,11 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [master]
+    branches: [master, devel]
   pull_request:
-    branches: [master]
-
+    branches: [master, devel]
+  workflow_dispatch:
+  
 jobs:
   unit-tests:
     name: Runs unit tests on Ubuntu
@@ -13,13 +14,13 @@ jobs:
 
     steps:
       # Do git checkout
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      # Build using node 12.x
-      - name: Use node 12.x
-        uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16
 
       # Run unit tests 
       - name: Run unit tests
