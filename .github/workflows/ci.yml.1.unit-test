@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [master, devel]
   workflow_dispatch:
-  
+
 jobs:
   unit-tests:
     name: Runs unit tests on Ubuntu
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 16
 
-      # Run unit tests 
+      # Run unit tests
       - name: Run unit tests
         run: |
           npm install
